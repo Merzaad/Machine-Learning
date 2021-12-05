@@ -19,5 +19,5 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 model.fit(x_train,y_train, epochs=100 )
 model.evaluate(x_test,y_test)
 
-#prediction = model.predict(data_you_want_to_be_predicted)
+#prediction = model.predict(data_you_want_to_predict)
 #print(pd.DataFrame(prediction))

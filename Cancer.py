@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
 data=pd.read_csv('Cancer.csv')
+pred=pd.read_csv('CancerPred.csv')
 x=data.drop(columns=['diagnosis(1=m, 0=b)'])
 y=data['diagnosis(1=m, 0=b)']
 
@@ -19,5 +20,5 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 model.fit(x_train,y_train, epochs=100 )
 model.evaluate(x_test,y_test)
 
-#prediction = model.predict(data_you_want_to_predict)
-#print(pd.DataFrame(prediction))
+prediction = model.predict(pred)
+print(pd.DataFrame(prediction))

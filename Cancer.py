@@ -17,6 +17,8 @@ model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
+#binary_crossentropy because of y ( 0 or 1 )
+
 model.fit(x_train,y_train, epochs=100 )
 model.evaluate(x_test,y_test)
 

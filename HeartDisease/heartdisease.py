@@ -18,15 +18,20 @@ data['RestingECG_encoded'] = encoder.transform(data['RestingECG'])
 encoder.fit(data['ExerciseAngina'])
 data['ExerciseAngina_encoded'] = encoder.transform(data['ExerciseAngina'])
 
-x1=data.drop(columns=['HeartDisease','ChestPainType','Sex','ST_Slope','RestingECG','ExerciseAngina'])
-x=((x1-x1.min())/(x1.max()-x1.min()))*20
+x=data.drop(columns=['HeartDisease','ChestPainType','Sex','ST_Slope','RestingECG','ExerciseAngina'])
+
+x['RestingBP']=((x['RestingBP']-x['RestingBP'].min())/(x['RestingBP'].max()-x['RestingBP'].min()))
+x['Cholesterol']=((x['Cholesterol']-x['Cholesterol'].min())/(x['Cholesterol'].max()-x['Cholesterol'].min()))*20
+x['MaxHR']=((x['MaxHR']-x['MaxHR'].min())/(x['MaxHR'].max()-x['MaxHR'].min()))
+#x['Oldpeak']=((x['Oldpeak']-x['Oldpeak'].min())/(x['Oldpeak'].max()-x.min()))*
+
 y=data['HeartDisease']
 x_train , x_test , y_train , y_test = train_test_split(x,y,test_size=0.2)
 
 model=tf.keras.models.Sequential()
 
 model.add(tf.keras.layers.Dense(100, input_shape=(None,11), activation='sigmoid')) 
-model.add(tf.keras.layers.Dense(100, activation='sigmoid'))
+model.add(tf.keras.layers.Dense(120, activation='sigmoid'))
 model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])

@@ -21,7 +21,7 @@ data['ExerciseAngina_encoded'] = encoder.transform(data['ExerciseAngina'])
 x=data.drop(columns=['HeartDisease','ChestPainType','Sex','ST_Slope','RestingECG','ExerciseAngina'])
 
 x['RestingBP']=((x['RestingBP']-x['RestingBP'].min())/(x['RestingBP'].max()-x['RestingBP'].min()))
-x['Cholesterol']=((x['Cholesterol']-x['Cholesterol'].min())/(x['Cholesterol'].max()-x['Cholesterol'].min()))*20
+x['Cholesterol']=((x['Cholesterol']-x['Cholesterol'].min())/(x['Cholesterol'].max()-x['Cholesterol'].min()))*100
 x['MaxHR']=((x['MaxHR']-x['MaxHR'].min())/(x['MaxHR'].max()-x['MaxHR'].min()))
 #x['Oldpeak']=((x['Oldpeak']-x['Oldpeak'].min())/(x['Oldpeak'].max()-x.min()))*
 
@@ -30,8 +30,8 @@ x_train , x_test , y_train , y_test = train_test_split(x,y,test_size=0.2)
 
 model=tf.keras.models.Sequential()
 
-model.add(tf.keras.layers.Dense(100, input_shape=(None,11), activation='sigmoid')) 
-model.add(tf.keras.layers.Dense(120, activation='sigmoid'))
+model.add(tf.keras.layers.Dense(200, input_shape=(None,11), activation='sigmoid')) 
+model.add(tf.keras.layers.Dense(400, activation='sigmoid'))
 model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
